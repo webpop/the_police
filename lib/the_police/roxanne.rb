@@ -25,7 +25,6 @@ module ThePolice
     
     def call(env)
       @app.call(env).tap do |result|
-        puts "Hello there #{result.first} - #{result.first.class}- log ? #{watch_for.include?(result.first)}"
         if watch_for.include?(result.first)
           log(env, result)
         end
@@ -39,9 +38,8 @@ module ThePolice
         :type          => "request",
         :time          => Time.now.utc,
         :data          => {
-          :method        => request.method,
+          :method        => request.request_method
           :url           => request.url,
-          :headers       => request.headers,
           :params        => request.params,
           :response_body => result.last.size == 1 && result.last[0].kind_of?(String) ? result.last[0] : "IO Stream",          
         }
