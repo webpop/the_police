@@ -25,7 +25,8 @@ module ThePolice
     
     def call(env)
       @app.call(env).tap do |result|
-        if @watch_for.include?(result.first)
+        puts "Hello there #{result.first} - #{result.first.class}- log ? #{watch_for.include?(result.first)}"
+        if watch_for.include?(result.first)
           log(env, result)
         end
       end
