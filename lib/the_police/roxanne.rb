@@ -15,7 +15,7 @@ module ThePolice
                       options[:connection]
       
       @app = app
-      @collection = options[:connection].create_collection(
+      @collection = connection.create_collection(
           options[:collection] || 'messages-in-bottles',
           :capped => true,
           :size   => options[:capsize] || TEN_MEGABYTES)
