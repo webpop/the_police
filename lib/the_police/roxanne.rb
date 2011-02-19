@@ -10,8 +10,11 @@ module ThePolice
     
     def initialize(app, options)
       raise "Roxanne needs connections!" unless options[:connection]
+      connection = options[:connection].respond_to?(:call) ?
+                      options[:connection].call :
+                      options[:connection]
+      
       @app = app
-
       @collection = options[:connection].create_collection(
           options[:collection] || 'messages-in-bottles',
           :capped => true,
