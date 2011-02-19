@@ -38,7 +38,7 @@ module ThePolice
         :type          => "request",
         :time          => Time.now.utc,
         :data          => {
-          :method        => request.request_method
+          :method        => request.request_method,
           :url           => request.url,
           :params        => request.params,
           :response_body => result.last.size == 1 && result.last[0].kind_of?(String) ? result.last[0] : "IO Stream",          
